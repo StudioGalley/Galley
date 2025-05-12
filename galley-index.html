@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galley | Printmaking & Graphic Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #ef6f6c; /* Matching the logo's coral/salmon color */
+            --background-color: #fffcf0; /* Warm cream background */
+            --text-color: #333333;
+            --light-accent: #f5f2e8;
+            --dark-accent: #2c2c2c;
+            --spacing-unit: 1rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'EB Garamond', serif;
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Header styles */
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--background-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .logo img {
+            width: 100%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-icons {
+            display: flex;
+        }
+
+        .nav-icons a {
+            margin-left: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Cart badge */
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 1.2rem;
+            height: 1.2rem;
+            font-size: 0.7rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hero section styles */
+        .hero {
+            height: 80vh;
+            display: flex;
+            background-color: var(--background-color);
+        }
+
+        .hero-split {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-split::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .hero-split:hover::after {
+            opacity: 1;
+        }
+
+        .hero-split h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-split .btn {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-print {
+            background-image: url('https://via.placeholder.com/600x800');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-design {
+            background-image: url('https://via.placeholder.com/600x800');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Work preview section */
+        .work-preview {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin: 1rem auto 0;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .work-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-card img {
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .work-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .work-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 252, 240, 0.9);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .work-card:hover .work-overlay {
+            transform: translateY(0);
+        }
+
+        .work-overlay h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .view-more-btn {
+            text-align: center;
+        }
+
+        /* Newsletter section */
+        .newsletter {
+            padding: 4rem 0;
+            background-color: var(--light-accent);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-right: none;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .newsletter-form button {
+            padding: 0 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: var(--dark-accent);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            max-width: 120px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            display: block;
+            width: 2rem;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Shop page styles */
+        .shop-header {
+            padding: 5rem 0;
+            background-color: var(--light-accent);
+            text-align: center;
+        }
+
+        .shop-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-options select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            height: 250px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .product-price {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Portfolio page styles */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-image {
+            height: 400px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 252, 240, 0.9);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-tags {
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-color);
+        }
+
+        /* Portfolio modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--background-color);
+            width: 90%;
+            max-width: 1000px;
+            margin: 5vh auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            background: var(--dark-accent);
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-header {
+            background-color: var(--light-accent);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .project-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-metadata h3 {
+            margin-bottom: 1rem;
+        }
+
+        .project-metadata ul {
+            list-style: none;
+        }
+
+        .project-metadata li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .project-metadata li strong {
+            display: inline-block;
+            width: 80px;
+        }
+
+        .project-images {
+            margin-top: 2rem;
+        }
+
+        .project-images img {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        /* About page styles */
+        .about-section {
+            padding: 5rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 500px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .about-text h2::after {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin-top: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Cart drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--background-color);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-color: #f8f8f8;
+            margin-right: 1rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #eee;
+            border: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .quantity-display {
+            width: 2rem;
+            text-align: center;
+            margin: 0 0.5rem;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .remove-item:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-family: 'Work Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--dark-accent);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .about-content {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .hero-split {
+                padding: 5rem 2rem;
+            }
+            
+            .work-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                margin-bottom: 1rem;
+                border-right: 1px solid #ddd;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 400px;
+                order: 2;
+            }
+            
+            .about-text {
+                order: 1;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-drawer {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                position: relative;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--background-color);
+                padding: 1rem 0;
+                border-bottom: 1px solid #eee;
+                display: none;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                padding: 0.5rem 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .shop-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .shop-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-options {
+                width: 100%;
+                margin-top: 1rem;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <!-- Logo SVG based on the uploaded image -->
+                <a href="index.html">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="#fffcf0"/>
+                        <g fill="#ef6f6c">
+                            <path d="M75,75 C75,75 100,75 125,80 C150,85 150,110 150,130 C150,180 125,200 100,200 C75,200 75,175 75,150 Z"/>
+                            <path d="M140,175 L140,200 L165,200 L165,175 Z"/>
+                            <circle cx="140" cy="150" r="15"/>
+                            <path d="M175,75 L200,75 L200,100 L175,100 Z"/>
+                            <path d="M175,125 L200,125 L200,200 L175,200 Z"/>
+                            <path d="M225,75 L300,75 L300,100 L275,100 L275,200 L250,200 L250,100 L225,100 Z"/>
+                            <path d="M225,125 L250,125 L250,150 L225,150 Z"/>
+                            <rect x="75" y="300" width="100" height="50"/>
+                            <rect x="225" y="300" width="100" height="50"/>
+                            <path d="M300,75 C300,75 325,150 350,200 L325,300 L375,200 Z"/>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="workshop.html">Workshops</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+                <a href="#" id="cart-icon" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content (homepage) -->
+    <main id="page-content">
+        <!-- Hero section with split -->
+        <section class="hero">
+            <div class="hero-split hero-print">
+                <h2>Printmaking</h2>
+                <a href="shop.html" class="btn">Shop Now</a>
+            </div>
+            <div class="hero-split hero-design">
+                <h2>Graphic Design</h2>
+                <a href="portfolio.html" class="btn">View Portfolio</a>
+            </div>
+        </section>
+
+        <!-- Work preview section -->
+        <section class="work-preview">
+            <div class="container">
+                <h2 class="section-title">Featured Work</h2>
+                <div class="work-grid">
+                    <!-- Work preview cards (6) -->
+                    <div class="work-card">
+                        <img src="https://via.placeholder.com/400x300" alt="Work preview">
+                        <div class="work-overlay">
+                            <h3>Hand-carved Linocut</h3>
+                            <p>Limited edition print, 2024</p>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <img src="https://via.placeholder.com/400x300" alt="Work preview">
+                        <div class="work-overlay">
+                            <h3>Editorial Design</h3>
+                            <p>Client project, 2023</p>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <img src="https://via.placeholder.com/400x300" alt="Work preview">
+                        <div class="work-overlay">
+                            <h3>Woodblock Print</h3>
+                            <p>Artist series, 2024</p>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <img src="https://via.placeholder.com/400x300" alt="Work preview">
+                        <div class="work-overlay">
+                            <h3>Brand Identity</h3>
+                            <p>Client project, 2024</p>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <img src="https://via.placeholder.com/400x300" alt="Work preview">
+                        <div class="work-overlay">
+                            <h3>Intaglio Print</h3>
+                            <p>Limited edition, 2023</p>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <img src="https://via.placeholder.com/400x300" alt="Work preview">
+                        <div class="work-overlay">
+                            <h3>Typography Design</h3>
+                            <p>Personal project, 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-more-btn">
+                    <a href="shop.html" class="btn">View Shop</a>
+                    <a href="portfolio.html" class="btn btn-outline">View Portfolio</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter section -->
+        <section class="newsletter">
+            <div class="container">
+                <h2>Join Our Newsletter</h2>
+                <p>Subscribe to receive updates on new prints, design projects, and upcoming exhibitions.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="footer-logo">
+                        <g fill="#ffffff">
+                            <path d="M75,75 C75,75 100,75 125,80 C150,85 150,110 150,130 C150,180 125,200 100,200 C75,200 75,175 75,150 Z"/>
+                            <path d="M140,175 L140,200 L165,200 L165,175 Z"/>
+                            <circle cx="140" cy="150" r="15"/>
+                            <path d="M175,75 L200,75 L200,100 L175,100 Z"/>
+                            <path d="M175,125 L200,125 L200,200 L175,200 Z"/>
+                            <path d="M225,75 L300,75 L300,100 L275,100 L275,200 L250,200 L250,100 L225,100 Z"/>
+                            <path d="M225,125 L250,125 L250,150 L225,150 Z"/>
+                            <rect x="75" y="300" width="100" height="50"/>
+                            <rect x="225" y="300" width="100" height="50"/>
+                            <path d="M300,75 C300,75 325,150 350,200 L325,300 L375,200 Z"/>
+                        </g>
+                    </svg>
+                    <p>Handcrafted printmaking and graphic design studio based in your location. Creating thoughtful, meaningful work since 2022.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">All Prints</a></li>
+                        <li><a href="#">Linocuts</a></li>
+                        <li><a href="#">Woodblocks</a></li>
+                        <li><a href="#">Limited Editions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Branding</a></li>
+                        <li><a href="#">Print Design</a></li>
+                        <li><a href="#">Editorial</a></li>
+                        <li><a href="#">Custom Prints</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Info</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Galley Studio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span>$0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal -->
+    <div class="modal" id="portfolio-modal">
+        <div class="modal-content">
+            <!-- Modal content will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

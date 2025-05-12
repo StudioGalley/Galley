@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Galley Printmaking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #ef6f6c; /* Matching the logo's coral/salmon color */
+            --background-color: #fffcf0; /* Warm cream background */
+            --text-color: #333333;
+            --light-accent: #f5f2e8;
+            --dark-accent: #2c2c2c;
+            --spacing-unit: 1rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'EB Garamond', serif;
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Header styles */
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--background-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .logo img {
+            width: 100%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-icons {
+            display: flex;
+        }
+
+        .nav-icons a {
+            margin-left: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Cart badge */
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 1.2rem;
+            height: 1.2rem;
+            font-size: 0.7rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Shop page styles */
+        .shop-header {
+            padding: 5rem 0;
+            background-color: var(--light-accent);
+            text-align: center;
+        }
+
+        .shop-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-options select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            height: 250px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .product-price {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: var(--dark-accent);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            max-width: 120px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            display: block;
+            width: 2rem;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Cart drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--background-color);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-color: #f8f8f8;
+            margin-right: 1rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #eee;
+            border: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .quantity-display {
+            width: 2rem;
+            text-align: center;
+            margin: 0 0.5rem;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .remove-item:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-family: 'Work Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--dark-accent);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                margin-bottom: 1rem;
+                border-right: 1px solid #ddd;
+            }
+            
+            .cart-drawer {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                position: relative;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--background-color);
+                padding: 1rem 0;
+                border-bottom: 1px solid #eee;
+                display: none;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                padding: 0.5rem 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .shop-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .shop-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-options {
+                width: 100%;
+                margin-top: 1rem;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="#fffcf0"/>
+                        <g fill="#ef6f6c">
+                            <path d="M75,75 C75,75 100,75 125,80 C150,85 150,110 150,130 C150,180 125,200 100,200 C75,200 75,175 75,150 Z"/>
+                            <path d="M140,175 L140,200 L165,200 L165,175 Z"/>
+                            <circle cx="140" cy="150" r="15"/>
+                            <path d="M175,75 L200,75 L200,100 L175,100 Z"/>
+                            <path d="M175,125 L200,125 L200,200 L175,200 Z"/>
+                            <path d="M225,75 L300,75 L300,100 L275,100 L275,200 L250,200 L250,100 L225,100 Z"/>
+                            <path d="M225,125 L250,125 L250,150 L225,150 Z"/>
+                            <rect x="75" y="300" width="100" height="50"/>
+                            <rect x="225" y="300" width="100" height="50"/>
+                            <path d="M300,75 C300,75 325,150 350,200 L325,300 L375,200 Z"/>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="workshop.html">Workshops</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+                <a href="#" id="cart-icon" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shop Page Content -->
+    <main>
+        <section class="shop-header">
+            <div class="container">
+                <h1>Printmaking Shop</h1>
+                <p>Discover unique, handcrafted prints from our collection</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="shop-filters">
+                <div class="filter-options">
+                    <select id="category-filter">
+                        <option>All Prints</option>
+                        <option>Linocuts</option>
+                        <option>Woodblock Prints</option>
+                        <option>Etchings</option>
+                    </select>
+                    <select id="sort-filter">
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest Arrivals</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="shop-grid" id="product-grid">
+                <!-- Products will be dynamically populated -->
+                <div class="product-card" data-product-id="print-001">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Handmade Linocut Print">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Mountain Landscape Linocut</h3>
+                        <p class="product-description">Limited edition hand-printed linocut</p>
+                        <div class="product-price">$85.00</div>
+                        <button class="btn add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="print-002">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Forest Woodblock Print">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Forest Woodblock Print</h3>
+                        <p class="product-description">Original woodblock print on Japanese paper</p>
+                        <div class="product-price">$120.00</div>
+                        <button class="btn add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="print-003">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Abstract Etching Series">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Abstract Etching Series I</h3>
+                        <p class="product-description">Copper plate etching with aquatint (2/25)</p>
+                        <div class="product-price">$95.00</div>
+                        <button class="btn add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="print-004">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Botanical Linocut Print">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Botanical Linocut Print</h3>
+                        <p class="product-description">Hand-carved linocut print on cotton paper</p>
+                        <div class="product-price">$75.00</div>
+                        <button class="btn add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="print-005">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Cityscape Relief Print">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Cityscape Relief Print</h3>
+                        <p class="product-description">Multi-block relief print (5/30)</p>
+                        <div class="product-price">$110.00</div>
+                        <button class="btn add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="print-006">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Ocean Waves Drypoint">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Ocean Waves Drypoint</h3>
+                        <p class="product-description">Drypoint etching on handmade paper</p>
+                        <div class="product-price">$135.00</div>
+                        <button class="btn add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">Next</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="footer-logo">
+                        <g fill="#ffffff">
+                            <path d="M75,75 C75,75 100,75 125,80 C150,85 150,110 150,130 C150,180 125,200 100,200 C75,200 75,175 75,150 Z"/>
+                            <path d="M140,175 L140,200 L165,200 L165,175 Z"/>
+                            <circle cx="140" cy="150" r="15"/>
+                            <path d="M175,75 L200,75 L200,100 L175,100 Z"/>
+                            <path d="M175,125 L200,125 L200,200 L175,200 Z"/>
+                            <path d="M225,75 L300,75 L300,100 L275,100 L275,200 L250,200 L250,100 L225,100 Z"/>
+                            <path d="M225,125 L250,125 L250,150 L225,150 Z"/>
+                            <rect x="75" y="300" width="100" height="50"/>
+                            <rect x="225" y="300" width="100" height="50"/>
+                            <path d="M300,75 C300,75 325,150 350,200 L325,300 L375,200 Z"/>
+                        </g>
+                    </svg>
+                    <p>Handcrafted printmaking and graphic design studio based in your location. Creating thoughtful, meaningful work since 2022.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">All Prints</a></li>
+                        <li><a href="#">Linocuts</a></li>
+                        <li><a href="#">Woodblocks</a></li>
+                        <li><a href="#">Limited Editions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Branding</a></li>
+                        <li><a href="#">Print Design</a></li>
+                        <li><a href="#">Editorial</a></li>
+                        <li><a href="#">Custom Prints</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Info</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Galley Studio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span>$0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="shop-script.js"></script>
+</body>
+</html>
